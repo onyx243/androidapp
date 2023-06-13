@@ -36,7 +36,7 @@ jobs:
       run: git clone https://github.com/onyx243/CodeQL-Queries.git
 
     - name: Grant execute permission for gradlew
-      run: sudo chmod +x ./gradlew
+      run: chmod +x gradlew || true
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
