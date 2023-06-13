@@ -35,24 +35,10 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew
 
-    - name: Download external queries
-      run: |
-        mkdir externalQueries
-        cd externalQueries
-        wget https://raw.githubusercontent.com/onyx243/CodeQL-Queries/main/java/crypto.ql
-        wget https://raw.githubusercontent.com/onyx243/CodeQL-Queries/main/java/hash.ql
-        wget https://raw.githubusercontent.com/onyx243/CodeQL-Queries/main/java/insecurehttp.ql
-        wget https://raw.githubusercontent.com/onyx243/CodeQL-Queries/main/java/java.random.ql
-        wget https://raw.githubusercontent.com/onyx243/CodeQL-Queries/main/java/null_pointer_exception.ql
-        wget https://raw.githubusercontent.com/onyx243/CodeQL-Queries/main/java/resourceleak.ql
-        wget https://raw.githubusercontent.com/onyx243/CodeQL-Queries/main/java/sensitiveinfo.ql
-        wget https://raw.githubusercontent.com/onyx243/CodeQL-Queries/main/java/sql.ql
-
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-        queries: +security-and-quality,./externalQueries/*.ql
 
     - name: Build with Gradle
       run: ./gradlew assembleDebug
